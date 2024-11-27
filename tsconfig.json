@@ -19,7 +19,8 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@configs/*": ["./src/configs/*"],
-      "@gateways/*": ["./src/gateways/*"]
+      "@gateways/*": ["./src/gateways/*"],
+      "@domains/*": ["./src/domains/*"]
     }
   },
   "include": ["src/**/*"],

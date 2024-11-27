@@ -5,6 +5,11 @@
     "lineWidth": 120
   },
   "organizeImports": { "enabled": true },
+  "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    }
+  },
   "linter": {
     "enabled": true,
     "rules": {
