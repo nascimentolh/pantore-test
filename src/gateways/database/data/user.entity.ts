@@ -1,3 +1,4 @@
+import { UserRole } from "@domains/user-role.enum";
 import { Builder, type IBuilder } from "builder-pattern";
 import { Column, Entity } from "typeorm";
 import { EncryptionTransformer } from "typeorm-encrypted";
@@ -21,6 +22,9 @@ export class UserEntity extends GenericEntity {
     }),
   })
   public password: string;
+
+  @Column("enum", { enum: UserRole, default: UserRole.CUSTOMER })
+  public role: UserRole;
 
   public static builder(): IBuilder<UserEntity> {
     return Builder<UserEntity>();

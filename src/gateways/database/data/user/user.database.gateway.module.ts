@@ -3,6 +3,7 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { UserEntity } from "../user.entity";
 import { CreateUserDatabaseGatewayKey } from "./create.user.database.gateway";
+import { FindUserByEmailDatabaseGatewayKey } from "./find.user.by.email.gateway";
 import { UserDatabaseTypeOrmImpl } from "./impl/user.database.typeorm.impl";
 
 @Module({
@@ -10,6 +11,10 @@ import { UserDatabaseTypeOrmImpl } from "./impl/user.database.typeorm.impl";
   providers: [
     {
       provide: CreateUserDatabaseGatewayKey,
+      useClass: UserDatabaseTypeOrmImpl,
+    },
+    {
+      provide: FindUserByEmailDatabaseGatewayKey,
       useClass: UserDatabaseTypeOrmImpl,
     },
   ],

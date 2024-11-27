@@ -20,7 +20,8 @@
     "paths": {
       "@configs/*": ["./src/configs/*"],
       "@gateways/*": ["./src/gateways/*"],
-      "@domains/*": ["./src/domains/*"]
+      "@domains/*": ["./src/domains/*"],
+      "@use-cases/*": ["./src/use-cases/*"]
     }
   },
   "include": ["src/**/*"],
