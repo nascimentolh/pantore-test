@@ -1,5 +1,6 @@
 import { User } from "@domains/user";
 import { UserDatabaseGatewayException } from "@gateways/database/exceptions/user.database.gateway.exception";
+import { LoggerErrorGateway, LoggerErrorGatewayKey } from "@gateways/logger/interfaces/logger.error.gateway";
 import { LoggerLogGateway, LoggerLogGatewayKey } from "@gateways/logger/interfaces/logger.log.gateway";
 import { Inject } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
@@ -15,6 +16,8 @@ export class UserDatabaseTypeOrmImpl implements CreateUserDatabaseGateway, FindU
     private readonly userEntityRepository: Repository<UserEntity>,
     @Inject(LoggerLogGatewayKey)
     private readonly loggerLogGateway: LoggerLogGateway,
+    @Inject(LoggerErrorGatewayKey)
+    private readonly loggerErrorGateway: LoggerErrorGateway,
   ) {}
 
   public async findByEmail(email: string): Promise<User | null> {
@@ -27,8 +30,19 @@ export class UserDatabaseTypeOrmImpl implements CreateUserDatabaseGateway, FindU
 
       const userEntity = await this.userEntityRepository.findOneBy({ email });
 
+      if (!userEntity) {
+        return null;
+      }
+
       return mapperUserFromUserEntity(userEntity);
     } catch (error) {
+      this.loggerErrorGateway.error({
+        class: UserDatabaseTypeOrmImpl.name,
+        meta: error.message,
+        method: "findByEmail",
+        error: error.stack,
+      });
+
       throw new UserDatabaseGatewayException(error.stack);
     }
   }
@@ -42,6 +56,12 @@ export class UserDatabaseTypeOrmImpl implements CreateUserDatabaseGateway, FindU
       });
       await this.userEntityRepository.save(user);
     } catch (error) {
+      this.loggerErrorGateway.error({
+        class: UserDatabaseTypeOrmImpl.name,
+        meta: error.message,
+        method: "insert",
+        error: error.stack,
+      });
       throw new UserDatabaseGatewayException(error.stack);
     }
   }

@@ -1,4 +1,5 @@
-import { Logger } from "@nestjs/common";
+import { ExceptionHandler } from "@configs/handlers/exception/exception.handler";
+import { LoggerErrorGatewayKey } from "@gateways/logger/interfaces/logger.error.gateway";
 import { NestFactory } from "@nestjs/core";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { AppModule } from "./app.module";
@@ -6,9 +7,7 @@ import { AppModule } from "./app.module";
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  Logger.log("Starting application...", "Bootstrap");
-
-  app.enableShutdownHooks(); // Opcional, para capturar eventos de shutdown
+  app.useGlobalFilters(new ExceptionHandler(app.get(LoggerErrorGatewayKey)));
 
   app.setGlobalPrefix("/api/v1");
 

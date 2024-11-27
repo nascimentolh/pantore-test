@@ -18,6 +18,6 @@ import { UserDatabaseTypeOrmImpl } from "./impl/user.database.typeorm.impl";
       useClass: UserDatabaseTypeOrmImpl,
     },
   ],
-  exports: [CreateUserDatabaseGatewayKey],
+  exports: [CreateUserDatabaseGatewayKey, FindUserByEmailDatabaseGatewayKey],
 })
 export class UserDataBaseGatewayModule {}
