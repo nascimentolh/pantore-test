@@ -1,9 +1,9 @@
-import type { User } from "@domains/user";
+import { User } from "@domains/user";
 import {
-  type FindUserByEmailDatabaseGateway,
+  FindUserByEmailDatabaseGateway,
   FindUserByEmailDatabaseGatewayKey,
 } from "@gateways/database/data/user/find.user.by.email.gateway";
-import { type LoggerLogGateway, LoggerLogGatewayKey } from "@gateways/logger/interfaces/logger.log.gateway";
+import { LoggerLogGateway, LoggerLogGatewayKey } from "@gateways/logger/interfaces/logger.log.gateway";
 import { Inject, Injectable } from "@nestjs/common";
 
 @Injectable()

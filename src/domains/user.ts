@@ -1,5 +1,5 @@
-import { Builder, type IBuilder } from "builder-pattern";
-import type { UserRole } from "./user-role.enum";
+import { Builder, IBuilder } from "builder-pattern";
+import { UserRole } from "./user-role.enum";
 
 export class User {
   public readonly id?: number;

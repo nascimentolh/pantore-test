@@ -1,5 +1,5 @@
-import type { User } from "@domains/user";
-import { Injectable, type PipeTransform } from "@nestjs/common";
+import { User } from "@domains/user";
+import { Injectable, PipeTransform } from "@nestjs/common";
 import { RequestValidationBase } from "../common/pipes/request.validation.base";
 import { CreateUserRequest } from "../json/create.user.request";
 import { mapperUserFromCreateRequest } from "./mappers/user.mapper";

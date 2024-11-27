@@ -1,4 +1,4 @@
-import type { LoggerMessage } from "./logger.message";
+import { LoggerMessage } from "./logger.message";
 
 export interface LoggerWarnGateway {
   warn(LoggerMessage: LoggerMessage): void;

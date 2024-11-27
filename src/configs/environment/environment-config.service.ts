@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
-import type { AppProperties } from "./app.properties";
-import type { AppConfig } from "./app.properties.interface";
+import { ConfigService } from "@nestjs/config";
+import { AppProperties } from "./app.properties";
+import { AppConfig } from "./app.properties.interface";
 
 @Injectable()
 export class EnvironmentConfigService implements AppConfig {

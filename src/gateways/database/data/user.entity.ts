@@ -1,5 +1,5 @@
 import { UserRole } from "@domains/user-role.enum";
-import { Builder, type IBuilder } from "builder-pattern";
+import { Builder, IBuilder } from "builder-pattern";
 import { Column, Entity } from "typeorm";
 import { EncryptionTransformer } from "typeorm-encrypted";
 import { GenericEntity } from "./generic.entity";

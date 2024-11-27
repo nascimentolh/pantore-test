@@ -1,5 +1,5 @@
 import { User } from "@domains/user";
-import type { CreateUserRequest } from "../../json/create.user.request";
+import { CreateUserRequest } from "../../json/create.user.request";
 
 export function mapperUserFromCreateRequest(createUserRequest: CreateUserRequest): User {
   return User.builder()

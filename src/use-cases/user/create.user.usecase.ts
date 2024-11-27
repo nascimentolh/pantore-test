@@ -1,13 +1,13 @@
-import type { User } from "@domains/user";
+import { User } from "@domains/user";
 import {
-  type CreateUserDatabaseGateway,
+  CreateUserDatabaseGateway,
   CreateUserDatabaseGatewayKey,
 } from "@gateways/database/data/user/create.user.database.gateway";
-import { type LoggerLogGateway, LoggerLogGatewayKey } from "@gateways/logger/interfaces/logger.log.gateway";
-import { type LoggerWarnGateway, LoggerWarnGatewayKey } from "@gateways/logger/interfaces/logger.warn.gateway";
+import { LoggerLogGateway, LoggerLogGatewayKey } from "@gateways/logger/interfaces/logger.log.gateway";
+import { LoggerWarnGateway, LoggerWarnGatewayKey } from "@gateways/logger/interfaces/logger.warn.gateway";
 import { Inject, Injectable } from "@nestjs/common";
 import { EmailAlreadyExistsBusinessException } from "../exceptions/email.already.register.business.exception";
-import type { FindUserByEmailUseCase } from "./find.user.by.email.usecase";
+import { FindUserByEmailUseCase } from "./find.user.by.email.usecase";
 
 @Injectable()
 export class CreateUserUseCase {

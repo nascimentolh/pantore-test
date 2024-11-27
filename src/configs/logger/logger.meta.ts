@@ -1,4 +1,4 @@
-import { Builder, type IBuilder } from "builder-pattern";
+import { Builder, IBuilder } from "builder-pattern";
 
 export class LoggerMeta {
   public readonly method: string;

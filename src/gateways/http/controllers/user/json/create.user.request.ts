@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Builder, type IBuilder } from "builder-pattern";
+import { Builder, IBuilder } from "builder-pattern";
 import { IsEmail, IsNotEmpty, IsString, Length, MaxLength } from "class-validator";
 
 export class CreateUserRequest {

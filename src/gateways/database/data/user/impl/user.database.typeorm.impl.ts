@@ -1,12 +1,12 @@
-import type { User } from "@domains/user";
+import { User } from "@domains/user";
 import { UserDatabaseGatewayException } from "@gateways/database/exceptions/user.database.gateway.exception";
-import { type LoggerLogGateway, LoggerLogGatewayKey } from "@gateways/logger/interfaces/logger.log.gateway";
+import { LoggerLogGateway, LoggerLogGatewayKey } from "@gateways/logger/interfaces/logger.log.gateway";
 import { Inject } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import type { Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { UserEntity } from "../../user.entity";
-import type { CreateUserDatabaseGateway } from "../create.user.database.gateway";
-import type { FindUserByEmailDatabaseGateway } from "../find.user.by.email.gateway";
+import { CreateUserDatabaseGateway } from "../create.user.database.gateway";
+import { FindUserByEmailDatabaseGateway } from "../find.user.by.email.gateway";
 import { mapperUserFromUserEntity } from "../mappers/user.database.mapper";
 
 export class UserDatabaseTypeOrmImpl implements CreateUserDatabaseGateway, FindUserByEmailDatabaseGateway {

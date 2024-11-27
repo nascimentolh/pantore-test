@@ -4,7 +4,9 @@
     "indentStyle": "space",
     "lineWidth": 120
   },
-  "organizeImports": { "enabled": true },
+  "organizeImports": {
+    "enabled": true
+  },
   "javascript": {
     "parser": {
       "unsafeParameterDecoratorsEnabled": true
@@ -19,6 +21,7 @@
         "noConfusingVoidType": "off"
       },
       "style": {
+        "useImportType": "off",
         "noUselessElse": "off",
         "noNonNullAssertion": "off"
       },

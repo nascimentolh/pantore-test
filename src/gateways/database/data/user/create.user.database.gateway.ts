@@ -1,4 +1,4 @@
-import type { User } from "@domains/user";
+import { User } from "@domains/user";
 
 export interface CreateUserDatabaseGateway {
   insert(user: User): Promise<void>;

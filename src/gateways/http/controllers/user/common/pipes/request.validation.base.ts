@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus } from "@nestjs/common";
-import { type ClassConstructor, plainToInstance } from "class-transformer";
-import { type ValidationError, validate } from "class-validator";
+import { ClassConstructor, plainToInstance } from "class-transformer";
+import { ValidationError, validate } from "class-validator";
 
 export class RequestValidationBase {
   public async validateClass<T>(cls: ClassConstructor<any>, value: T) {

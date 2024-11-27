@@ -1,11 +1,11 @@
-import { Inject, Injectable, type Logger } from "@nestjs/common";
+import { Inject, Injectable, Logger } from "@nestjs/common";
 import { WINSTON_MODULE_PROVIDER } from "nest-winston";
-import type { LoggerDebugGateway } from "../interfaces/logger.debug.gateway";
-import type { LoggerErrorGateway } from "../interfaces/logger.error.gateway";
-import type { LoggerLogGateway } from "../interfaces/logger.log.gateway";
-import type { LoggerMessage } from "../interfaces/logger.message";
-import type { LoggerVerboseGateway } from "../interfaces/logger.verbose.gateway";
-import type { LoggerWarnGateway } from "../interfaces/logger.warn.gateway";
+import { LoggerDebugGateway } from "../interfaces/logger.debug.gateway";
+import { LoggerErrorGateway } from "../interfaces/logger.error.gateway";
+import { LoggerLogGateway } from "../interfaces/logger.log.gateway";
+import { LoggerMessage } from "../interfaces/logger.message";
+import { LoggerVerboseGateway } from "../interfaces/logger.verbose.gateway";
+import { LoggerWarnGateway } from "../interfaces/logger.warn.gateway";
 import { removeKeyOfObject } from "./removeKeyOfObject";
 
 const fieldsToRemoveFromMeta = ["password"];

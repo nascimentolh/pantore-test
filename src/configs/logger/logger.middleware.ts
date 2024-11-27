@@ -1,6 +1,6 @@
-import { type LoggerLogGateway, LoggerLogGatewayKey } from "@gateways/logger/interfaces/logger.log.gateway";
-import { Inject, Injectable, type NestMiddleware } from "@nestjs/common";
-import type { NextFunction, Request, Response } from "express";
+import { LoggerLogGateway, LoggerLogGatewayKey } from "@gateways/logger/interfaces/logger.log.gateway";
+import { Inject, Injectable, NestMiddleware } from "@nestjs/common";
+import { NextFunction, Request, Response } from "express";
 import * as requestIp from "request-ip";
 import { LoggerMeta } from "./logger.meta";
 

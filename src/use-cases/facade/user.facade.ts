@@ -1,7 +1,7 @@
-import type { User } from "@domains/user";
-import { type LoggerLogGateway, LoggerLogGatewayKey } from "@gateways/logger/interfaces/logger.log.gateway";
+import { User } from "@domains/user";
+import { LoggerLogGateway, LoggerLogGatewayKey } from "@gateways/logger/interfaces/logger.log.gateway";
 import { Inject, Injectable } from "@nestjs/common";
-import type { CreateUserUseCase } from "../user/create.user.usecase";
+import { CreateUserUseCase } from "../user/create.user.usecase";
 
 @Injectable()
 export class UserFacade {
