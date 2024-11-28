@@ -8,6 +8,7 @@ import { Repository } from "typeorm";
 import { UserEntity } from "../../user.entity";
 import { CreateUserDatabaseGateway } from "../create.user.database.gateway";
 import { FindUserByEmailDatabaseGateway } from "../find.user.by.email.gateway";
+import { FindUserByIdDatabaseGateway } from "../find.user.by.id.database.gateway";
 import { FindAllUserDatabaseGateway } from "../findall.user.database.gateway";
 import { mapperUserEntityFromUser, mapperUserFromUserEntity } from "../mappers/user.database.mapper";
 import { UpdateUserDatabaseGateway } from "../update.user.database.gateway";
@@ -17,7 +18,8 @@ export class UserDatabaseTypeOrmImpl
     CreateUserDatabaseGateway,
     FindUserByEmailDatabaseGateway,
     FindAllUserDatabaseGateway,
-    UpdateUserDatabaseGateway
+    UpdateUserDatabaseGateway,
+    FindUserByIdDatabaseGateway
 {
   constructor(
     @InjectRepository(UserEntity)
@@ -107,6 +109,22 @@ export class UserDatabaseTypeOrmImpl
         },
         userToUpdateMapped,
       );
+    } catch (error) {
+      throw new UserDatabaseGatewayException(error.stack);
+    }
+  }
+
+  public async findById(id: number): Promise<User | null> {
+    try {
+      this.loggerLogGateway.log({
+        class: UserDatabaseTypeOrmImpl.name,
+        meta: id,
+        method: "findById",
+      });
+
+      const userEntity = await this.userEntityRepository.findOneBy({ id });
+
+      return mapperUserFromUserEntity(userEntity);
     } catch (error) {
       throw new UserDatabaseGatewayException(error.stack);
     }
