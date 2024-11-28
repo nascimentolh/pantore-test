@@ -9,6 +9,7 @@ import { UserEntity } from "../../user.entity";
 import { CreateUserDatabaseGateway } from "../create.user.database.gateway";
 import { FindUserByEmailDatabaseGateway } from "../find.user.by.email.gateway";
 import { FindUserByIdDatabaseGateway } from "../find.user.by.id.database.gateway";
+import { FindUsersBySearchGateway } from "../find.users.by.search.gateway";
 import { FindAllUserDatabaseGateway } from "../findall.user.database.gateway";
 import { mapperUserEntityFromUser, mapperUserFromUserEntity } from "../mappers/user.database.mapper";
 import { UpdateUserDatabaseGateway } from "../update.user.database.gateway";
@@ -19,7 +20,8 @@ export class UserDatabaseTypeOrmImpl
     FindUserByEmailDatabaseGateway,
     FindAllUserDatabaseGateway,
     UpdateUserDatabaseGateway,
-    FindUserByIdDatabaseGateway
+    FindUserByIdDatabaseGateway,
+    FindUsersBySearchGateway
 {
   constructor(
     @InjectRepository(UserEntity)
@@ -30,6 +32,30 @@ export class UserDatabaseTypeOrmImpl
     private readonly loggerErrorGateway: LoggerErrorGateway,
   ) {}
 
+  public async findUsersBySearch(field: string, searchValue: string): Promise<User[]> {
+    try {
+      this.loggerLogGateway.log({
+        class: UserDatabaseTypeOrmImpl.name,
+        method: "findUsersBySearch",
+        meta: { field, searchValue },
+      });
+
+      const usersEntity = await this.userEntityRepository
+        .createQueryBuilder("user")
+        .where(`user.${field} LIKE :searchValue`, { searchValue: `%${searchValue}%` })
+        .getMany();
+
+      return usersEntity.map(mapperUserFromUserEntity);
+    } catch (error) {
+      this.loggerErrorGateway.error({
+        class: UserDatabaseTypeOrmImpl.name,
+        method: "findUsersBySearch",
+        error: error.stack,
+      });
+      throw new UserDatabaseGatewayException(error.stack);
+    }
+  }
+
   public async findAll(): Promise<User[]> {
     try {
       this.loggerLogGateway.log({
@@ -39,9 +65,7 @@ export class UserDatabaseTypeOrmImpl
 
       const usersEntity = await this.userEntityRepository.find();
 
-      return usersEntity.map((userEntity) => {
-        return mapperUserFromUserEntity(userEntity);
-      });
+      return usersEntity.map(mapperUserFromUserEntity);
     } catch (error) {
       throw new UserDatabaseGatewayException(error.stack);
     }

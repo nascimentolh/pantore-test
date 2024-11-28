@@ -5,6 +5,7 @@ import { UserEntity } from "../user.entity";
 import { CreateUserDatabaseGatewayKey } from "./create.user.database.gateway";
 import { FindUserByEmailDatabaseGatewayKey } from "./find.user.by.email.gateway";
 import { FindUserByIdDatabaseGatewayKey } from "./find.user.by.id.database.gateway";
+import { FindUsersBySearchGatewayKey } from "./find.users.by.search.gateway";
 import { FindAllUserDatabaseGatewayKey } from "./findall.user.database.gateway";
 import { UserDatabaseTypeOrmImpl } from "./impl/user.database.typeorm.impl";
 import { UpdateUserDatabaseGatewayKey } from "./update.user.database.gateway";
@@ -32,6 +33,10 @@ import { UpdateUserDatabaseGatewayKey } from "./update.user.database.gateway";
       provide: FindUserByIdDatabaseGatewayKey,
       useClass: UserDatabaseTypeOrmImpl,
     },
+    {
+      provide: FindUsersBySearchGatewayKey,
+      useClass: UserDatabaseTypeOrmImpl,
+    },
   ],
   exports: [
     CreateUserDatabaseGatewayKey,
@@ -39,6 +44,7 @@ import { UpdateUserDatabaseGatewayKey } from "./update.user.database.gateway";
     FindAllUserDatabaseGatewayKey,
     UpdateUserDatabaseGatewayKey,
     FindUserByIdDatabaseGatewayKey,
+    FindUsersBySearchGatewayKey,
   ],
 })
 export class UserDataBaseGatewayModule {}

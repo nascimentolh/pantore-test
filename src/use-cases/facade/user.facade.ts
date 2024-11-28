@@ -3,6 +3,7 @@ import { LoggerLogGateway, LoggerLogGatewayKey } from "@gateways/logger/interfac
 import { Inject, Injectable } from "@nestjs/common";
 import { CreateUserUseCase } from "@use-cases/user/create.user.usecase";
 import { FindUserByIdUserUseCase } from "@use-cases/user/find.user.by.id.usecase";
+import { FindUsersBySearchUseCase } from "@use-cases/user/find.users.by.search.usecase";
 import { FindAllUserUseCase } from "@use-cases/user/findall.user.usecase";
 import { UpdateUserUseCase } from "@use-cases/user/update.user.usecase";
 
@@ -13,6 +14,7 @@ export class UserFacade {
     private readonly findAllUserUseCase: FindAllUserUseCase,
     private readonly updateUserUseCase: UpdateUserUseCase,
     private readonly findUserByIdUserUseCase: FindUserByIdUserUseCase,
+    private readonly findUsersBySearchUseCase: FindUsersBySearchUseCase,
     @Inject(LoggerLogGatewayKey)
     private readonly loggerLogGateway: LoggerLogGateway,
   ) {}
@@ -54,5 +56,14 @@ export class UserFacade {
     });
 
     return this.findUserByIdUserUseCase.findById(id);
+  }
+
+  public async findUsersBySearch(field: string, searchValue: string): Promise<User[]> {
+    this.loggerLogGateway.log({
+      class: UserFacade.name,
+      method: "findUsersBySearch",
+    });
+
+    return this.findUsersBySearchUseCase.findUsersBySearch(field, searchValue);
   }
 }
