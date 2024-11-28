@@ -6,4 +6,7 @@ export interface AppConfig {
   getDatabaseName(): string;
   getDatabaseSchema(): string;
   getDatabaseSync(): boolean;
+  getJwtSecret(): string;
+  getJwtExpirationTime(): number;
+  getJwtRefreshTokenExpirationTime(): number;
 }
