@@ -16,15 +16,15 @@ export class CreateTokensUseCase {
     private readonly encryptionGateway: EncryptionGateway,
   ) {}
 
-  public async create(userId: number, userCpf: string, userRole: string) {
+  public async create(userId: number, userEmail: string, userRole: string) {
     this.loggerLogGateway.log({
       class: CreateTokensUseCase.name,
       method: "create",
-      meta: { userCpf, userId, userRole },
+      meta: { userEmail, userId, userRole },
     });
 
     const [emailEncrypted, idEncrypted, roleEncrypted] = await Promise.all([
-      this.encryptionGateway.encrypt(userCpf),
+      this.encryptionGateway.encrypt(userEmail),
       this.encryptionGateway.encrypt(String(userId)),
       this.encryptionGateway.encrypt(String(userRole)),
     ]);

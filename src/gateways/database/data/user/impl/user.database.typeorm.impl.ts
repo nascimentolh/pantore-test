@@ -8,9 +8,12 @@ import { Repository } from "typeorm";
 import { UserEntity } from "../../user.entity";
 import { CreateUserDatabaseGateway } from "../create.user.database.gateway";
 import { FindUserByEmailDatabaseGateway } from "../find.user.by.email.gateway";
+import { FindAllUserDatabaseGateway } from "../findall.user.database.gateway";
 import { mapperUserFromUserEntity } from "../mappers/user.database.mapper";
 
-export class UserDatabaseTypeOrmImpl implements CreateUserDatabaseGateway, FindUserByEmailDatabaseGateway {
+export class UserDatabaseTypeOrmImpl
+  implements CreateUserDatabaseGateway, FindUserByEmailDatabaseGateway, FindAllUserDatabaseGateway
+{
   constructor(
     @InjectRepository(UserEntity)
     private readonly userEntityRepository: Repository<UserEntity>,
@@ -19,6 +22,23 @@ export class UserDatabaseTypeOrmImpl implements CreateUserDatabaseGateway, FindU
     @Inject(LoggerErrorGatewayKey)
     private readonly loggerErrorGateway: LoggerErrorGateway,
   ) {}
+
+  public async findAll(): Promise<User[]> {
+    try {
+      this.loggerLogGateway.log({
+        class: UserDatabaseTypeOrmImpl.name,
+        method: "findAll",
+      });
+
+      const usersEntity = await this.userEntityRepository.find();
+
+      return usersEntity.map((userEntity) => {
+        return mapperUserFromUserEntity(userEntity);
+      });
+    } catch (error) {
+      throw new UserDatabaseGatewayException(error.stack);
+    }
+  }
 
   public async findByEmail(email: string): Promise<User | null> {
     try {

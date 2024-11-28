@@ -3,6 +3,7 @@ import { Body, Controller } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { UserFacade } from "@use-cases/facade/user.facade";
 import { CreateUserDecorator } from "./decorators/create.user.decorator";
+import { FindAllUserDecorator } from "./decorators/find.all.user.decorator";
 import { UserCreatePipe } from "./pipes/user.create.pipe";
 
 @Controller("user")
@@ -13,5 +14,10 @@ export class UserController {
   @CreateUserDecorator()
   public async create(@Body(UserCreatePipe) userToCreate: User): Promise<void> {
     await this.userFacade.create(userToCreate);
+  }
+
+  @FindAllUserDecorator()
+  public async findAll(): Promise<User[]> {
+    return this.userFacade.findAll();
   }
 }
