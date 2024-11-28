@@ -6,7 +6,7 @@ import { JwtValidatePayload } from "./jwt.validate.payload";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly environmentConfigService: EnvironmentConfigService) {
+  constructor(environmentConfigService: EnvironmentConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,

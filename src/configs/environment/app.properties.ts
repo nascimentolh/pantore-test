@@ -9,4 +9,6 @@ export type AppProperties = {
   JWT_SECRET: string;
   JWT_EXPIRATION_TIME: number;
   JWT_REFRESH_TOKEN_EXPIRATION_TIME: number;
+  ENCRYPTION_PASSWORD: string;
+  ENCRYPTION_IV: string;
 };

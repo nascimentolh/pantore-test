@@ -34,4 +34,24 @@ export class EnvironmentConfigService implements AppConfig {
   public getDatabaseSync(): boolean {
     return this.configService.get<boolean>("DATABASE_SYNCHRONIZE");
   }
+
+  public getJwtSecret(): string {
+    return this.configService.get<string>("JWT_SECRET");
+  }
+
+  public getJwtExpirationTime(): number {
+    return this.configService.get<number>("JWT_EXPIRATION_TIME");
+  }
+
+  public getJwtRefreshTokenExpirationTime(): number {
+    return this.configService.get<number>("JWT_REFRESH_TOKEN_EXPIRATION_TIME");
+  }
+
+  public getEncryptionPassword(): string {
+    return this.configService.get<string>("ENCRYPTION_PASSWORD");
+  }
+
+  public getEncryptionIV(): string {
+    return this.configService.get<string>("ENCRYPTION_IV");
+  }
 }

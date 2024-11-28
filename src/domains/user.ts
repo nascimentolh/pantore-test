@@ -7,6 +7,8 @@ export class User {
   public readonly email: string;
   public readonly role?: UserRole;
   public readonly password?: string;
+  public readonly accessToken?: string;
+  public readonly refreshToken?: string;
 
   public static builder(): IBuilder<User> {
     return Builder<User>();

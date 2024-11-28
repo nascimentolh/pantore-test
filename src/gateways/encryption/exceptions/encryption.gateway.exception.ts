@@ -2,10 +2,10 @@ import { BaseException } from "@configs/exceptions/base.exception";
 import { HttpStatus } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 
-const code = "pantore.api.error.generate.jwt";
-const message = "Error to generate token.";
+const code = "pantore.api.error.encryption";
+const message = "Error to encryption value.";
 
-export class JWTGatewayException extends BaseException {
+export class EncryptionGatewayException extends BaseException {
   @ApiProperty({ default: code })
   public readonly code: string;
 

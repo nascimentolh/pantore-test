@@ -9,4 +9,6 @@ export interface AppConfig {
   getJwtSecret(): string;
   getJwtExpirationTime(): number;
   getJwtRefreshTokenExpirationTime(): number;
+  getEncryptionPassword(): string;
+  getEncryptionIV(): string;
 }
