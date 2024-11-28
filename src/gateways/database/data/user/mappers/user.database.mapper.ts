@@ -10,3 +10,13 @@ export function mapperUserFromUserEntity(userEntity: UserEntity): User {
     .password(userEntity.password)
     .build();
 }
+
+export function mapperUserEntityFromUser(user: User): UserEntity {
+  return UserEntity.builder()
+    .email(user.email)
+    .name(user.name)
+    .id(user.id)
+    .role(user.role)
+    .password(user.password)
+    .build();
+}
